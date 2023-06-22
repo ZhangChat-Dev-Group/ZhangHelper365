@@ -69,7 +69,7 @@ class Command{
 		if (!/^[a-zA-Z0-9/\+]{6}$/.test(trip)) return bot.chat('你管这叫识别码？')
 		this.manager.add(trip, user.nick, user.trip || '', message)
 		bot.chat(`我记下来了，当识别码为 ${trip} 的用户说话的时候，我会提醒TA查看的`)
-		bot.users.filter(u => u.trip === trip).forEach(u => u.noticed = false)
+		bot.users.users.filter(u => u.trip === trip).forEach(u => u.noticed = false)
 	}
 	notice(core, bot, payload) {
 		const user = bot.users.get(payload.nick)
