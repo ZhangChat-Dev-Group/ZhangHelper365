@@ -1,8 +1,8 @@
 const WebSocket = require('ws')
 
-class UserList extends Array {
+class UserList {
 	constructor (core) {
-		super()
+		this.users = []
 		this.core = core
 	}
 	add(payload) {
@@ -10,16 +10,19 @@ class UserList extends Array {
 		else if (payload.level >= 999999) payload.level = 3    // 普通管理员（mod）
 		else if (this.core.config.ops.includes(payload.trip)) payload.level = 2    // 协管
 		else payload.level = 1    // 普通用户
-		this.push(payload)
+		this.users.push(payload)
 	}
 	del(nick) {
-		delete this[this.findIndex((u) => u.nick === nick)]
+		this.users = this.users.filter(u => u.nick !== nick)
 	}
 	get(nick) {
-		return this.find((u) => u.nick === nick)
+		return this.users.find((u) => u.nick === nick)
 	}
 	change(nick,newNick) {
-		this.filter((u) => u.nick === nick).forEach((u) => u.nick = newNick)
+		this.users = this.users.map(u => {
+			if (u.nick === nick) u.nick = newNick
+			return u
+		})
 	}
 }
 
@@ -70,7 +73,7 @@ class MainClient extends WebSocket {
 		}else if (cmd === 'chat') {
 			this.core.logger.info(`${payload.nick}#${payload.trip || ''}: ${payload.text}`)
 			if (!payload.text.startsWith('^')) return
-			const user = this.users.find((u) => u.nick === payload.nick)
+			const user = this.users.get(payload.nick)
 			if (!user) {
 				this.core.logger.error(`Can\'n find user ${payload.nick}`)
 				process.exit(1)

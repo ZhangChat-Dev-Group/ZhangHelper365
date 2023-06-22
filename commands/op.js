@@ -10,7 +10,7 @@ class Command{
 		return {
 			name: 'op',
 			developer: 'ZhangSoft',
-			level: 1,
+			level: 3,
 			explain: '添加或删除一位协管，不传递参数则显示所有协管列表',
 			usage: '^op 识别码',
 		}
