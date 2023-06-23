@@ -64,7 +64,7 @@ class Command{
 	}
 	run(core, bot, user, args, payload){
 		const trip = args[1]
-		const message = args.slice(2)
+		const message = args.slice(2).join(' ')
 		if (!trip || !message) return bot.chat('抱歉，参数错误，请检查后再试')
 		if (!/^[a-zA-Z0-9/\+]{6}$/.test(trip)) return bot.chat('你管这叫识别码？')
 		this.manager.add(trip, user.nick, user.trip || '', message)
