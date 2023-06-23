@@ -9,9 +9,11 @@ class CommandManager {
 	initCommands() {
 		this.core.logger.info(`Loading command modules from ${this.commandPath}`)
 		this.commands = []
+		const errors = []
 		const loadResult = this.core.loader.load(this.commandPath)
 		const modules = this.core.loader.get(this.commandPath)
 		if (loadResult) {
+			errors.push(`Some command modules can't be loaded, error(s):\n${loadResult}`)
 			this.core.logger.error(`Some command modules can't be loaded, error(s):\n${loadResult}`)
 		}
 		this.core.logger.info(`${Object.keys(modules).length} command module(s) will be initialized`)
@@ -20,14 +22,19 @@ class CommandManager {
 			try {
 				temp = new modules[n](this.core)
 			}catch (e) {
+				errors.push(`Failed to initialize ${n}: ${e.message}`)
 				return this.core.logger.error(`Failed to initialize ${n}: ${e.message}`)
 			}
 			let verifyResult = this.verifyCommand(temp)
-			if (verifyResult) return this.core.logger.error(`Failed to initialize ${n}: ${verifyResult}`)
+			if (verifyResult) {
+				errors.push(`Failed to initialize ${n}: ${verifyResult}`)
+				return this.core.logger.error(`Failed to initialize ${n}: ${verifyResult}`)
+			}
 			this.commands.push(temp)
 			this.core.logger.info(`Initialized ${n}`)
 		})
 		this.core.logger.info(`Initialized ${this.commands.length} command(s)`)
+		return errors
 	}
 	verifyCommand(cmd) {
 		const info = cmd.info

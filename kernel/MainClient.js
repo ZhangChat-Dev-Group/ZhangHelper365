@@ -133,6 +133,7 @@ class MainClient extends WebSocket {
 		this.hooks = {}
 	}
 	loadHooks() {
+		this.clearHooks()
 		this.core.commands.loadHooks(this)
 		Object.keys(this.hooks).forEach((c) => {
 			this.hooks[c].sort((a, b) => a.level - b.level)

@@ -28,7 +28,7 @@ class ModuleLoader {
 			try{
 				this.modules[dir][file] = require(path.resolve(dir, file))
 			} catch (e) {
-				err.push(e.message)
+				err.push(`Failed to load ${path.resolve(dir, file)}: ${e.message}`)
 			}
 		})
 
