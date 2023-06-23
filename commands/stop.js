@@ -15,6 +15,7 @@ class Command{
 			bot.chat(`我将在5秒后停止运行`)
 		} else {
 			clearTimeout(core.exitTask)
+			delete core.exitTask
 			bot.chat(`已取消倒计时`)
 		}
 	}
