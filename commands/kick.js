@@ -15,7 +15,9 @@ class Command{
 		if (args.length < 2) {
 			return bot.chat('请告诉我谁即将被踢出去')
 		}
-		const badUsers = args.slice(1)
+		const badUsers = args.slice(1).map(n => {
+			return n.replace(/@/g, '').trim()
+		}).filter(n => !!n)
 		bot.sendJSON({
 			cmd: 'kick',
 			nick: badUsers,

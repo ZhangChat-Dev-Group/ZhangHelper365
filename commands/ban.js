@@ -17,6 +17,7 @@ class Command{
 		}
 		const badUsers = args.slice(1)
 		badUsers.forEach(n => {
+			if (!n.trim()) return
 			bot.sendJSON({
 				cmd: 'ban',
 				nick: n
