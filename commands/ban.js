@@ -7,7 +7,7 @@ class Command{
 			name: 'ban',
 			developer: 'ZhangSoft',
 			level: 3,
-			explain: '从当前频道踢出一个或多个用户',
+			explain: '从当前频道封禁一个或多个用户',
 			usage: '^ban 昵称1 昵称2 昵称3 ...',
 		}
 	}
