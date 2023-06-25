@@ -73,6 +73,7 @@ class Command{
 	}
 	notice(core, bot, payload) {
 		const user = bot.users.get(payload.nick)
+		core.logger.info(JSON.stringify(user))
 		if (user.noticed) return payload
 		if (!user.trip) return payload
 		if (this.manager.get(user.trip).filter(m => !m.read).length === 0) return payload

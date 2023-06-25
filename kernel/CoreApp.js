@@ -16,7 +16,7 @@ class CoreApp {
 			this.logger.info('Stopping kernel, code: '+String(code))
 		})
 		process.on('uncaughtException', (err) => {
-			this.logger.error(`The kernel encountered an unhandled error, detailed information:\n${err}`)
+			this.logger.error(`The kernel encountered an unhandled error, detailed information:\n${err.stack}`)
 			process.exit(1)
 		})
 	}

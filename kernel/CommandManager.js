@@ -52,7 +52,7 @@ class CommandManager {
 		try{ 
 			await cmd.run(this.core, this.core.client, user, args, payload)
 		} catch (err) {
-			this.core.logger.error(`Failed to run ${cmd.name} with ${args.join(' ')}, user: ${user.nick}#${user.trip}}. error: ${err}`)
+			this.core.logger.error(`Failed to run ${cmd.info.name} with ${args.join(' ')}, user: ${user.nick}#${user.trip}}. error: ${err.stack}`)
 			return err
 		}
 
