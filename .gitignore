@@ -1,4 +1,4 @@
-iode_modules
+node_modules
 logs/*.log
 config
 files/*
