@@ -69,7 +69,7 @@ class Command{
 		if (sameResult.level > level) level = sameResult.level
 
 		var warnings = fastResult.warnings
-		if (sameResult.warnings > warnings) level = sameResult.warnings
+		if (sameResult.warnings > warnings) warnings = sameResult.warnings
 		user.warnings = warnings
 
 		if (level === 1) {
