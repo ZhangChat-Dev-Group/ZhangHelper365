@@ -29,7 +29,7 @@ class Command{
 		}
 		user.lastChat = payload.time
 		if (warnings < 6 && warnings % 3 === 0 && tooFast) return { level: 1, warnings, }
-		else if (user.warnings >= 6) {
+		else if (warnings >= 6) {
 			warnings = 0
 			return { level: 2, warnings, }
 		}
@@ -70,6 +70,7 @@ class Command{
 
 		var warnings = fastResult.warnings
 		if (sameResult.warnings > warnings) level = sameResult.warnings
+		user.warnings = warnings
 
 		if (level === 1) {
 			bot.chat(`@${user.nick} \n# ==**你凭什么凌驾于规则之上？**==`)
