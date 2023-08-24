@@ -49,7 +49,7 @@ class Command{
 		var tooFast = false
 		if (payload.text === user.lastContent) {
 			warnings += 1
-			user.pardonTime = Date.now() + 2 * 60 * 1000
+			user.pardonTime = Date.now() + 20 * 1000
 			tooFast = true
 		}
 		user.lastContent = payload.text
