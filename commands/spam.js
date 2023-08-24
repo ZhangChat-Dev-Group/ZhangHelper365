@@ -80,7 +80,7 @@ class Command{
 			bot.sendJSON({
 				cmd: 'dumb',
 				nick: user.nick,
-				time: 1
+				time: 5,
 			})
 			return false
 		} else if (level === 0) return payload
