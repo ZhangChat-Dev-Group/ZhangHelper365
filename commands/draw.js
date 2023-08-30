@@ -44,7 +44,7 @@ class Command {
 			.catch(err => {
 				core.logger.error('Failed to download image, err: ' + err)
 			})
-			bot.chat(img)
+			bot.chat(`![](https://images.weserv.nl/?url=${link})`)
 		})
 	}
 }
