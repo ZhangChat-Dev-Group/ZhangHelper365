@@ -31,9 +31,12 @@ class Command {
 		programming.whisper('ultra_weeb', `&igen ${args.slice(1).join(' ')}`)
 		if (programming.listeners('img-res').length === 0) programming.on('img-res', img => {
 			core.logger.info(`Received a image: ${img}`)
+			if (!img) {
+				core.logger.warn(`ultra_weeb didn\'t drow a image.`)
+				return bot.chat('ultra_weeb 好像崩溃了，它没有发送一个有效的图片')
+			}
 			var link = img.slice(4)
 			link = link.slice(0, link.length - 1)
-			core.logger.info(`Link: ${link}`)
 			fetch(link).then(res => {
 				res.arrayBuffer().then(b => {
 					fs.writeFile(path.join(__dirname, '..', 'files', moment().format('YYYY-MM-DD_HH-mm-ss.png')), Buffer.from(b), {}, (err) => {
