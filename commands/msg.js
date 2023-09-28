@@ -43,7 +43,7 @@ class MessageManager {
 		this.message[trip].push({
 			msg: `[${now}] ${nick}#${senderTrip}: ${msg}`,
 			read: false,
-			trip, time: now,
+			trip: senderTrip, time: now,
 		})
 		this.save()
 	}
