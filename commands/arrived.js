@@ -23,6 +23,8 @@ class Command{
 			if (notRead.length > 0) notArrived.push({ trip: u, time: notRead.sort((a, b) => a.time - b.time)[0].time })
 		})
 
+		if (notArrived.length === 0) return bot.chat('好样的！你的留言都送达了！')
+
 		var reply = `# ${user.nick} 的留言未送达用户\n${notArrived.map(o => `识别码：${o.trip} | 最早未送达留言的日期：${moment(o.time).format('YYYY-MM-DD HH:mm:ss')}`).join('\n')}`
 		bot.whisper(user.nick, reply)
 	}
